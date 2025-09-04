@@ -4,4 +4,4 @@
 Этот репозиторий является каркасом для будущего веб-приложения.
 
 ## Ссылки
-- [Публичная страница на GitHub Pages](https://miyagi18.github.io/FAB-P1/)
+- [Публичная страница на GitHub Pages](https://miyagi18.github.io/FAB-P1/src/index.html)
