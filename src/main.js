@@ -1,58 +1,102 @@
+// Модальное окно
 const dlg = document.getElementById('contactDialog');
 const openBtn = document.getElementById('openDialog');
-const closeBtn = document.getElementById('closeDialog');
+const closeBtn = document.getElementById('closeDialogBtn');
 const form = document.getElementById('contactForm');
 let lastActive = null;
-openBtn.addEventListener('click', () => {
+
+// Открытие модалки
+openBtn?.addEventListener('click', () => {
     lastActive = document.activeElement;
-    dlg.showModal(); // модальный режим +
-    затемнение
-    dlg.querySelector('input,select,textarea,button')?.focus();
+    dlg.showModal();
+    dlg.querySelector('input, select, textarea, button')?.focus();
 });
-closeBtn.addEventListener('click', () => dlg.close('cancel'));
-form?.addEventListener('submit', (e) => {
-    // валидация см. 1.4.2; при успехе закрываем окно
+
+// Закрытие модалки
+closeBtn?.addEventListener('click', () => dlg.close('cancel'));
+
+// Закрытие по клику на бэкдроп
+dlg?.addEventListener('click', (e) => {
+    if (e.target === dlg) dlg.close('cancel');
 });
-dlg.addEventListener('close', () => { lastActive?.focus(); });
-// Esc по умолчанию вызывает событие 'cancel' и закрывает <dialog>
+
+// Возврат фокуса после закрытия
+dlg?.addEventListener('close', () => {
+    lastActive?.focus();
+});
+
+// Валидация формы
 form?.addEventListener('submit', (e) => {
-    // 1) Сброс кастомных сообщений
-    [...form.elements].forEach(el => el.setCustomValidity?.(''));
-    // 2) Проверка встроенных ограничений
+    // Сброс кастомных сообщений
+    [...form.elements].forEach(el => {
+        el.setCustomValidity?.('');
+        el.removeAttribute('aria-invalid');
+    });
+
+    // Проверка валидности
     if (!form.checkValidity()) {
         e.preventDefault();
-        // Пример: таргетированное сообщение
-        const email = form.elements.email;
-        if (email?.validity.typeMismatch) {
-            email.setCustomValidity('Введите корректный e-mail, например name@example.com');
-        }
-        form.reportValidity(); // показать браузерные подсказки
-        // A11y: подсветка проблемных полей
+        
+        // Показ ошибок
         [...form.elements].forEach(el => {
-            if (el.willValidate) el.toggleAttribute('aria-invalid',
-                !el.checkValidity());
+            if (el.willValidate && !el.checkValidity()) {
+                el.setAttribute('aria-invalid', 'true');
+                
+                // Кастомные сообщения
+                if (el.validity.valueMissing) {
+                    el.setCustomValidity('Это поле обязательно для заполнения');
+                } else if (el.validity.typeMismatch) {
+                    el.setCustomValidity('Пожалуйста, введите корректное значение');
+                } else if (el.validity.patternMismatch) {
+                    el.setCustomValidity('Пожалуйста, соблюдайте требуемый формат');
+                }
+            }
         });
+        
+        form.reportValidity();
         return;
     }
-    // 3) Успешная «отправка» (без сервера)
+
+    // Успешная отправка
     e.preventDefault();
-    // Если форма внутри <dialog>, закрываем окно:
-    document.getElementById('contactDialog')?.close('success');
+    alert('Форма успешно отправлена!');
+    dlg.close('success');
     form.reset();
 });
 
+// Маска для телефона (дополнительное задание)
 const phone = document.getElementById('phone');
-phone?.addEventListener('input', () => {
-    const digits = phone.value.replace(/\D/g, '').slice(0, 11); // до 11 цифр
-    const d = digits.replace(/^8/, '7'); // нормализуем 8 → 7
-    const parts = [];
-    if (d.length > 0) parts.push('+7');
-    if (d.length > 1) parts.push(' (' + d.slice(1, 4));
-    if (d.length >= 4) parts[parts.length - 1] += ')';
-    if (d.length >= 5) parts.push(' ' + d.slice(4, 7));
-    if (d.length >= 8) parts.push('-' + d.slice(7, 9));
-    if (d.length >= 10) parts.push('-' + d.slice(9, 11));
-    phone.value = parts.join('');
+phone?.addEventListener('input', (e) => {
+    const input = e.target;
+    let value = input.value.replace(/\D/g, '');
+    
+    if (value.startsWith('8')) {
+        value = '7' + value.slice(1);
+    }
+    
+    if (value.startsWith('7') && value.length > 1) {
+        let formattedValue = '+7 (';
+        
+        if (value.length > 1) {
+            formattedValue += value.slice(1, 4);
+        }
+        
+        if (value.length >= 4) {
+            formattedValue += ') ';
+        }
+        
+        if (value.length >= 5) {
+            formattedValue += value.slice(4, 7);
+        }
+        
+        if (value.length >= 8) {
+            formattedValue += '-' + value.slice(7, 9);
+        }
+        
+        if (value.length >= 10) {
+            formattedValue += '-' + value.slice(9, 11);
+        }
+        
+        input.value = formattedValue;
+    }
 });
-// Строгая проверка (если задаёте pattern из JS):
-phone?.setAttribute('pattern', '^\\+7 \\(\\d{3}\\) \\d{3}-\\d{2}-\\d{2}$');

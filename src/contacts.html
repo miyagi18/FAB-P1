@@ -10,27 +10,34 @@
     <link rel="stylesheet" href="style.css">
     <title>О нас - Название вашего сайта</title>
     <meta name="description" content="Контакты нашей компании">
-    <script src="main.js" defer></script>   
+    <script src="main.js" defer></script>
 </head>
 
 <body>
-    <header>
-        <a href="/">Логотип или название сайта</a>
-        <!-- Главное меню навигации -->
-        <nav>
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="about.html">О нас</a></li>
-                <li><a href="contacts.html">Контакты</a></li>
-            </ul>
-        </nav>
+   <header class="header">
+        <div class="header__container">
+            <a href="/" class="header__logo">Логотип или название сайта</a>
+
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li><a href="index.html" class="nav__link nav__link--active">Главная</a></li>
+                    <li><a href="about.html" class="nav__link">О нас</a></li>
+                    <li><a href="contacts.html" class="nav__link">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <main>
-        <!-- Простые "хлебные крошки" -->
-        <nav aria-label="Хлебные крошки">
-            <a href="index.html">Главная</a> →
-            <span>О нас</span>
+        <nav class="breadcrumbs" aria-label="Хлебные крошки">
+            <ul class="breadcrumbs__list">
+                <li class="breadcrumbs__item">
+                    <a href="index.html" class="breadcrumbs__link">Главная</a>
+                </li>
+                <li class="breadcrumbs__item">
+                    <a href="about.html" class="breadcrumbs__link">О нас</a>
+                </li>
+            </ul>
         </nav>
 
         <h1>О нашей компании</h1>
@@ -45,33 +52,59 @@
         <!-- Кнопка открытия модалки -->
         <button id="openDialog" type="button">Написать нам</button>
         <!-- Модалка с формой -->
-        <dialog id="contactDialog" aria-labelledby="dialogTitle">
-            <h2 id="dialogTitle">Обратная связь</h2>
-            <form id="contactForm" method="dialog" novalidate>
-                <label for="name">Имя</label>
-                <input id="name" name="name" type="text" required minlength="2" autocomplete="given-name">
-                <label for="email">E-mail</label>
-                <input id="email" name="email" type="email" required autocomplete="email">
-                <label for="phone">Телефон</label>
-                <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"
-                    aria-describedby="phoneHelp" placeholder="+7 (___) ___-__-__" required
-                    pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$">
-                <small id="phoneHelp">Формат: +7 (900) 000-00-00</small>
-                <label for="date">Дата</label>
-                <input id="date" name="date" type="date">
-                <label for="topic">Тема</label>
-                <select id="topic" name="topic" required>
-                    <option value="">Выберите тему</option>
-                    <option>Вопрос</option>
-                    <option>Заказ</option>
-                </select>
-                <label for="message">Сообщение</label>
-                <textarea id="message" name="message" rows="4" required></textarea>
-                <div class="form-actions">
-                    <button type="button" id="closeDialog">Закрыть</button>
-                    <button type="submit">Отправить</button>
+        <dialog id="contactDialog" class="modal" aria-labelledby="dialogTitle">
+            <div class="modal__window">
+                <div class="modal__header">
+                    <h2 id="dialogTitle" class="modal__title">Обратная связь</h2>
+                    <button class="modal__close" id="closeDialog" aria-label="Закрыть">×</button>
                 </div>
-            </form>
+
+                <form id="contactForm" class="form" method="dialog" novalidate>
+                    <div class="form__field">
+                        <label for="name" class="form__label">Имя</label>
+                        <input id="name" name="name" type="text" class="form__input" required minlength="2"
+                            autocomplete="given-name">
+                        <div class="form__error" aria-live="polite">Пожалуйста, введите ваше имя</div>
+                    </div>
+
+                    <div class="form__field">
+                        <label for="email" class="form__label">E-mail</label>
+                        <input id="email" name="email" type="email" class="form__input" required autocomplete="email">
+                        <div class="form__error" aria-live="polite">Пожалуйста, введите корректный email</div>
+                    </div>
+
+                    <div class="form__field">
+                        <label for="phone" class="form__label">Телефон</label>
+                        <input id="phone" name="phone" type="tel" class="form__input" inputmode="tel" autocomplete="tel"
+                            aria-describedby="phoneHelp" placeholder="+7 (___) ___-__-__" required
+                            pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$">
+                        <small id="phoneHelp" class="form__help">Формат: +7 (900) 000-00-00</small>
+                        <div class="form__error" aria-live="polite">Пожалуйста, введите корректный номер телефона</div>
+                    </div>
+
+                    <div class="form__field">
+                        <label for="topic" class="form__label">Тема</label>
+                        <select id="topic" name="topic" class="form__select" required>
+                            <option value="">Выберите тему</option>
+                            <option>Вопрос</option>
+                            <option>Заказ</option>
+                            <option>Жалоба</option>
+                        </select>
+                        <div class="form__error" aria-live="polite">Пожалуйста, выберите тему</div>
+                    </div>
+
+                    <div class="form__field">
+                        <label for="message" class="form__label">Сообщение</label>
+                        <textarea id="message" name="message" rows="4" class="form__textarea" required></textarea>
+                        <div class="form__error" aria-live="polite">Пожалуйста, введите ваше сообщение</div>
+                    </div>
+
+                    <div class="form__actions">
+                        <button type="button" id="closeDialogBtn" class="btn btn--secondary">Закрыть</button>
+                        <button type="submit" class="btn btn--primary">Отправить</button>
+                    </div>
+                </form>
+            </div>
         </dialog>
     </main>
 

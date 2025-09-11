@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Главная - Название вашего сайта</title>
     <meta name="description" content="Краткое описание главной страницы вашего сайта">
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <!-- Шапка сайта -->
-    <header>
-        <a href="/">Логотип или название сайта</a>
-        <!-- Главное меню навигации -->
-        <nav>
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="about.html">О нас</a></li>
-                <li><a href="contacts.html">Контакты</a></li>
-            </ul>
-        </nav>
+    <header class="header">
+        <div class="header__container">
+            <a href="/" class="header__logo">Логотип или название сайта</a>
+
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li><a href="index.html" class="nav__link nav__link--active">Главная</a></li>
+                    <li><a href="about.html" class="nav__link">О нас</a></li>
+                    <li><a href="contacts.html" class="nav__link">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <!-- Уникальное основное содержимое страницы -->
@@ -36,6 +40,9 @@
         <!-- Секция 2 с якорем -->
         <section id="portfolio">
             <h2>Портфолио</h2>
+            <img src="../images/project-400.jpg" 
+                sizes="(max-width: 768px) 92vw, (max-width: 1200px) 640px, 800px" alt="Пример нашего проекта"
+                width="800" height="450" loading="lazy">
             <p>Примеры наших работ...</p>
         </section>
 
@@ -53,4 +60,5 @@
         <p>Телефон: +7 (123) 456-78-90</p>
     </footer>
 </body>
+
 </html>
