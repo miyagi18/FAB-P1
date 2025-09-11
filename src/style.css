@@ -31,3 +31,309 @@ button:hover { filter: brightness(0.95); }
 :disabled, [aria-disabled="true"] { opacity: .6; cursor: not-allowed; }
 /* Подсветка ошибочных полей (установите aria-invalid="true") */
 [aria-invalid="true"] { border-color: #b00020; }
+
+:root{
+ /* Палитра */
+ --color-bg:#fff; --color-fg:#0b0b0b; --color-muted:#666;
+ --color-primary:#0a84ff; --color-danger:#b00020;
+ /* Типографика и размеры */
+ --font-body:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+ --space-1:4px; --space-2:8px; --space-3:16px; --space-4:24px; --space5:40px;
+ /* Скругления и тени */
+ --radius:12px;
+ --shadow:0 1px 2px rgba(0,0,0,.08), 0 8px 24px rgba(0,0,0,.08);
+ --space-1: 4px;   /* 4px */
+  --space-2: 8px;    /* 8px */
+  --space-3: 12px;   /* 12px */
+  --space-4: 16px;      /* 16px */
+  --space-5: 20px;   /* 20px */
+  --space-6: 24px;    /* 24px */
+  --space-7: 32px;      /* 32px */
+  --space-8: 40px;    /* 40px */
+  --space-9: 48px;      /* 48px */
+  --space-10: 64px;     /* 64px */
+}
+/* Тёмная тема: переопределяем только значения токенов */
+body.theme-dark{
+ --color-bg:#0b0b0b; --color-fg:#f5f5f5; --color-muted:#aaa;
+ --color-primary:#6aa2ff;
+}
+
+/* Reset-минимум — подробнее в 1.8 */
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+body{
+ background:var(--color-bg);
+ color:var(--color-fg);
+ font-family:var(--font-body);
+ line-height:1.5;
+}
+
+*{ box-sizing:border-box; } /* Проще считать ширины/высоты */
+html,body{ margin:0; padding:0; } /* Убираем стартовые отступы браузера */
+/* БЛОК: Header */
+.header {
+    background-color: #f8f9fa;
+    padding: var(--space-4) 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.header__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__logo {
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: #212529;
+}
+
+.nav__list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: var(--space-6);
+}
+
+.nav__link {
+    text-decoration: none;
+    color: #495057;
+    padding: var(--space-2) 0;
+    position: relative;
+    transition: color 0.2s ease;
+}
+
+.nav__link:hover,
+.nav__link:focus-visible {
+    color: var(--color-primary);
+    outline: none;
+}
+
+.nav__link--active {
+    color: var(--color-primary);
+    font-weight: 500;
+}
+
+.nav__link--active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--color-primary);
+}
+
+/* БЛОК: Breadcrumbs */
+.breadcrumbs {
+    padding: var(--space-4) 0;
+    font-size: 0.9rem;
+}
+
+.breadcrumbs__list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: var(--space-2);
+}
+
+.breadcrumbs__item:not(:last-child)::after {
+    content: '→';
+    margin-left: var(--space-2);
+    color: #6c757d;
+}
+
+.breadcrumbs__link {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.breadcrumbs__link:hover,
+.breadcrumbs__link:focus-visible {
+    text-decoration: underline;
+    outline: none;
+}
+
+.breadcrumbs__item:last-child .breadcrumbs__link {
+    color: #6c757d;
+    pointer-events: none;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+section:target {
+    background-color: rgba(10, 132, 255, 0.05);
+    padding: var(--space-2);
+    border-radius: var(--space-4);
+    transition: background-color 0.3s ease;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.form__field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.form__label {
+    font-weight: 500;
+    margin-bottom: var(--space-1);
+}
+
+.form__input,
+.form__select,
+.form__textarea {
+    padding: var(--space-3);
+    border: 1px solid #c8c8c8;
+    border-radius: var(--space-4);
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+}
+
+.form__input:focus-visible,
+.form__select:focus-visible,
+.form__textarea:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.form__input[aria-invalid="true"],
+.form__select[aria-invalid="true"],
+.form__textarea[aria-invalid="true"] {
+    border-color: var(--color-danger);
+}
+
+.form__help {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-top: var(--space-1);
+}
+
+.form__error {
+    font-size: 0.875rem;
+    color: var(--color-danger);
+    margin-top: var(--space-1);
+    display: none;
+}
+
+.form__input[aria-invalid="true"] ~ .form__error {
+    display: block;
+}
+
+.form__actions {
+    display: flex;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+    justify-content: flex-end;
+}
+
+.modal[hidden] {
+    display: none;
+}
+
+.modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal__window {
+    position: relative;
+    z-index: 1;
+    background: #fff;
+    border-radius: var(--radius);
+    padding: var(--space-5);
+    width: min(92vw, 520px);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-6);
+}
+
+.modal__title {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.modal__close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    width: auto;
+    max-width: none;
+}
+
+dialog {
+    padding: var(--space-6);
+    border: none;
+    border-radius: var(--radius);
+    width: min(92vw, 520px);
+    max-height: 90vh;
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.btn {
+    padding: var(--space-3) var(--space-6);
+    border: none;
+    border-radius: var(--space-4);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+}
+
+.btn:hover {
+    filter: brightness(0.95);
+}
+
+.btn:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.btn--primary {
+    background: var(--color-primary);
+    color: #fff;
+}
+
+.btn--secondary {
+    background: #6c757d;
+    color: #fff;
+}
+
+.btn--outline {
+    background: transparent;
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+}

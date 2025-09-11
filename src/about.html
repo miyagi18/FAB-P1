@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,17 +11,20 @@
     <title>О нас - Название вашего сайта</title>
     <meta name="description" content="Узнайте больше о нашей компании и истории">
 </head>
+
 <body>
-    <header>
-        <a href="/">Логотип или название сайта</a>
-        <!-- Главное меню навигации -->
-        <nav>
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="about.html">О нас</a></li>
-                <li><a href="contacts.html">Контакты</a></li>
-            </ul>
-        </nav>
+    <header class="header">
+        <div class="header__container">
+            <a href="/" class="header__logo">Логотип или название сайта</a>
+
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li><a href="index.html" class="nav__link nav__link--active">Главная</a></li>
+                    <li><a href="about.html" class="nav__link">О нас</a></li>
+                    <li><a href="contacts.html" class="nav__link">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <main>
@@ -35,6 +39,10 @@
             <h2>Наша история</h2>
             <p>Текст о том, как все начиналось...</p>
         </section>
+        <iframe width="720" height="405" src="https://rutube.ru/play/embed/332c9920860a57bb5cd08e2a64152585/"
+            style="border: none;" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen
+            allowFullScreen>
+        </iframe>
         <section>
             <h2>Наша команда</h2>
             <p>Текст о команде...</p>
@@ -46,4 +54,5 @@
         <p>Телефон: +7 (123) 456-78-90</p>
     </footer>
 </body>
+
 </html>
