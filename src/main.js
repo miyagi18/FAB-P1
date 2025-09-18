@@ -100,3 +100,79 @@ phone?.addEventListener('input', (e) => {
         input.value = formattedValue;
     }
 });
+
+// ====== УПРАВЛЕНИЕ ТЕМОЙ ======
+
+// Функция для установки темы
+function setTheme(theme) {
+    document.body.className = theme;
+    localStorage.setItem('theme', theme);
+    updateThemeIcon(theme);
+}
+
+// Функция для обновления иконки темы
+function updateThemeIcon(theme) {
+    const themeIcon = document.querySelector('.theme-toggle__icon');
+    if (!themeIcon) return;
+    themeIcon.textContent = theme === 'theme-dark' ? '☀️' : '🌙';
+}
+
+// Инициализация темы при загрузке
+function initTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    // Если тема сохранена, используем её, иначе проверяем системные настройки
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = savedTheme ? savedTheme : (systemPrefersDark ? 'theme-dark' : 'theme-light');
+    setTheme(theme);
+}
+
+// Переключение темы
+function toggleTheme() {
+    const currentTheme = document.body.className;
+    const newTheme = currentTheme === 'theme-dark' ? 'theme-light' : 'theme-dark';
+    setTheme(newTheme);
+}
+
+// Ждём загрузку DOM
+document.addEventListener('DOMContentLoaded', () => {
+    // Инициализируем тему
+    initTheme();
+
+    // Назначаем обработчик на кнопку переключения темы
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+    } else {
+        console.error('Кнопка переключения темы не найдена!');
+    }
+});
+
+// Функция для обновления темы модального окна
+function updateModalTheme() {
+    const dialog = document.getElementById('contactDialog');
+    if (!dialog) return;
+    
+    const isDark = document.body.classList.contains('theme-dark');
+    
+    if (isDark) {
+        dialog.classList.add('theme-dark');
+    } else {
+        dialog.classList.remove('theme-dark');
+    }
+}
+
+// Обновляем функцию setTheme
+function setTheme(theme) {
+    document.body.className = theme;
+    localStorage.setItem('theme', theme);
+    updateThemeIcon(theme);
+    updateModalTheme(); // Добавляем обновление модального окна
+}
+
+// Также обновляем тему модального окна при его открытии
+openBtn?.addEventListener('click', () => {
+    lastActive = document.activeElement;
+    dlg.showModal();
+    dlg.querySelector('input, select, textarea, button')?.focus();
+    updateModalTheme(); // Обновляем тему при открытии
+});

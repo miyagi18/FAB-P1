@@ -8,6 +8,7 @@
     <meta name="description" content="Краткое описание главной страницы вашего сайта">
     <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
 </head>
 
 <body>
@@ -23,6 +24,12 @@
                     <li><a href="contacts.html" class="nav__link">Контакты</a></li>
                 </ul>
             </nav>
+
+            <div class="theme-toggle">
+                <button id="themeToggle" class="theme-toggle__btn" aria-label="Переключить тему">
+                    <span class="theme-toggle__icon">🌙</span>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -40,9 +47,8 @@
         <!-- Секция 2 с якорем -->
         <section id="portfolio">
             <h2>Портфолио</h2>
-            <img src="../images/project-400.jpg" 
-                sizes="(max-width: 768px) 92vw, (max-width: 1200px) 640px, 800px" alt="Пример нашего проекта"
-                width="800" height="450" loading="lazy">
+            <img src="../images/project-400.jpg" srcset="../images/project-400.jpg 400w," sizes="(max-width: 768px) 92vw, (max-width: 1200px) 640px, 800px"
+                alt="Пример нашего проекта" width="800" height="450" loading="lazy">
             <p>Примеры наших работ...</p>
         </section>
 
