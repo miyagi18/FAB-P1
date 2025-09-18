@@ -287,6 +287,47 @@ section:target {
     max-width: none;
 }
 
+/* Стили для модального окна в тёмной теме */
+body.theme-dark .modal__window {
+    background: #2d2d2d;
+    color: #f5f5f5;
+}
+
+body.theme-dark .modal__title {
+    color: #f5f5f5;
+}
+
+body.theme-dark .modal__close {
+    color: #f5f5f5;
+    background: none;
+}
+
+body.theme-dark .modal__close:hover {
+    color: var(--color-primary);
+}
+
+body.theme-dark .form__label {
+    color: #f5f5f5;
+}
+
+body.theme-dark .form__help {
+    color: #aaa;
+}
+
+body.theme-dark .btn--secondary {
+    background: #555;
+    color: #f5f5f5;
+}
+
+body.theme-dark .btn--secondary:hover {
+    background: #666;
+}
+
+/* Стили для backdrop в тёмной теме */
+body.theme-dark dialog::backdrop {
+    background: rgba(0, 0, 0, 0.7);
+}
+
 dialog {
     padding: var(--space-6);
     border: none;
@@ -336,4 +377,78 @@ dialog::backdrop {
     background: transparent;
     border: 1px solid var(--color-primary);
     color: var(--color-primary);
+}
+
+/* Переключатель темы */
+.theme-toggle {
+    margin-left: var(--space-4);
+}
+
+.theme-toggle__btn {
+    background: none;
+    border: 1px solid var(--color-muted);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle__btn:hover {
+    background: var(--color-primary);
+    color: white;
+}
+
+/* Тёмная тема */
+body.theme-dark {
+    --color-bg: #1a1a1a;
+    --color-fg: #f5f5f5;
+    --color-muted: #aaa;
+    --color-primary: #6aa2ff;
+    --color-danger: #ff5252;
+}
+
+body.theme-dark .header {
+    background-color: #2d2d2d;
+    border-bottom-color: #404040;
+}
+
+body.theme-dark .header__logo {
+    color: #f5f5f5;
+}
+
+body.theme-dark .nav__link {
+    color: #ccc;
+}
+
+body.theme-dark .nav__link:hover,
+body.theme-dark .nav__link:focus-visible {
+    color: var(--color-primary);
+}
+
+body.theme-dark dialog {
+    background: #2d2d2d;
+    color: #f5f5f5;
+}
+
+body.theme-dark .form__input,
+body.theme-dark .form__select,
+body.theme-dark .form__textarea {
+    background: #3d3d3d;
+    border-color: #555;
+    color: #f5f5f5;
+}
+
+body.theme-dark footer {
+    background: #2d2d2d;
+    color: #ccc;
+}
+
+/* Добавьте в начало CSS */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
